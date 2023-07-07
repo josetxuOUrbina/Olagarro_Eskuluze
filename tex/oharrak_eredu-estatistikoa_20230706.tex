@@ -169,10 +169,27 @@ https://tex.stackexchange.com/questions/493500/making-a-logo-with-arabic-text?no
 https://tex.stackexchange.com/questions/96678/toward-a-stamper-package
 
 
+https://www.togaware.com/linux/survivor/transparent-images.html
+We can replace the white background of a JPG image with a transparent background to create a PNG image using convert from imagemagick. The key option is -transparent:
 
 
+https://itsfoss.com/install-imagemagick-ubuntu/
+comprobar si está instalado
+convert -version
+Version: ImageMagick 6.9.11-60 Q16 x86_64 2021-01-25 https://imagemagick.org
+Copyright: (C) 1999-2021 ImageMagick Studio LLC
+License: https://imagemagick.org/script/license.php
+Features: Cipher DPC Modules OpenMP(4.5) 
+Delegates (built-in): bzlib djvu fftw fontconfig freetype heic jbig jng jp2 jpeg lcms lqr ltdl lzma openexr pangocairo png tiff webp wmf x xml zlib
+Está
+sudo apt install imagemagick
 
 
+$ convert -transparent white orig.jpg trans.png
+$ display trans.png
+
+
+https://stackoverflow.com/questions/9155377/set-transparent-background-using-imagemagick-and-commandline-prompt
 
 
 

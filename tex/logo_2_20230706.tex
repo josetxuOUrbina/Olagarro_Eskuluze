@@ -1,0 +1,105 @@
+\documentclass{article}
+\usepackage{lipsum}
+\usepackage{xcolor,pgfplots}
+\usepackage{tikz}
+\usetikzlibrary{calc,patterns,fadings,positioning,decorations.pathmorphing,fit}
+\usetikzlibrary{decorations.text}
+\pgfplotsset{compat=1.7} 
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{rotating}
+
+% STAMP CONFIGURABLE CONTENT
+
+\definecolor{stampink}{RGB}{0 34 85}           % Define color old stamp in RGB 
+\newcommand\textUp{TOWARD A STAMPER PACKAGE}   % Top label
+\newcommand\textDown{Open question}            % Bottom label
+\newcommand\textCap{\texttt{\bfseries\today}}                    % Center label
+% PDF (name and path) for best result with same RGB that stampink
+\newcommand\CoatOfArms{trans_5.png}  
+
+
+% STAMP FIXED CODE 
+% free hand style of circles stolen from https://tex.stackexchange.com/a/49272/11604
+\pgfdeclaredecoration{free hand}{start}
+{
+  \state{start}[width = +1pt,
+                next state=step,
+                persistent precomputation = \pgfdecoratepathhascornersfalse]{}
+  \state{step}[auto end on length    = 3pt, % 3
+               auto corner on length = 3pt, % 3               
+               width=+1pt] % 1
+  {
+    \pgfpathlineto{
+      \pgfpointadd
+      {\pgfpoint{1pt}{1pt}}
+      {\pgfpoint{rand*.25pt}{rand*.2pt}} % good values .2pt aand .15pt
+    }
+  }
+  \state{final}
+  {}
+}
+ \tikzset{free hand/.style={
+    decorate,
+    decoration={free hand}
+    }
+ } 
+\def\freedraw#1;{\draw[free hand] #1;} 
+
+
+%CENTRAL STAMP CONTENT
+\newcommand\textCenter{
+\begin{minipage}{2.2cm}{}
+\vspace{-1em}
+\centering
+\includegraphics[width=1.8cm,height=1.8cm]{\CoatOfArms}\par
+\resizebox{2cm}{.205cm}{\textcolor{stampink}{\textCap}}%
+\end{minipage}
+}
+
+% STAMPER MACRO
+\newcommand\Stamper{\resizebox{3cm}{3cm}{ % FINAL SIZE TAMP
+\begin{tikzpicture}[opacity=.8,transparency group]
+\normalsize\sffamily
+% EXTERIOR CIRCLE
+\freedraw[color=stampink,opacity=.3,line width=5pt,rotate=0] (0,0.02) circle (3.6cm);
+\freedraw[color=stampink,opacity=.5,line width=3pt,rotate=30] (0,0.01) circle (3.6cm);
+\freedraw[color=stampink,opacity=.7,very thick,rotate=20] (0,0) circle (3.6cm);
+% TOP CIRCULAR LABEL 
+\path [opacity=.2,postaction={decorate,decoration={raise=-1.3ex,text along path, 
+reverse path,text align=center,
+text={|\huge\bfseries\color{stampink}|\textUp}}}] (-31:3.055cm) arc (-31:210:3.055cm);
+\path [opacity=.4,postaction={decorate,decoration={raise=-1.7ex,text along path, 
+reverse path,text align=center,
+text={|\huge\bfseries\color{stampink}|\textUp}}}] (-30.7:3.055cm) arc (-30.7:210:3.055cm);
+\path [opacity=.8,postaction={decorate,decoration={raise=-1.5ex,text along path, 
+reverse path,text align=center,
+text={|\huge\bfseries\color{stampink}|\textUp}}}] (-30:3.05cm) arc (-30:210:3.05cm);
+% BOTTOM CIRCULAR LABEL
+\path [opacity=.2,postaction={decorate,decoration={raise=-1.2ex,text along path, text align=center,
+text={|\huge\bfseries\color{stampink}|\textDown}}}] (210:3.05cm) arc (210:330:3.05cm);
+\path [opacity=.4,postaction={decorate,decoration={raise=-.85ex,text along path, text align=center,
+text={|\huge\bfseries\color{stampink}|\textDown}}}] (210:3.05cm) arc (210:330:3.05cm);
+\path [opacity=.8,postaction={decorate,decoration={raise=-1ex,text along path, text align=center,
+text={|\huge\bfseries\color{stampink}|\textDown}}}] (210:3.05cm) arc (210:330:3.05cm);
+%INNER CIRCLE AND CENTRAL CONTENT
+\freedraw[color=stampink,opacity=.3,line width=4pt,rotate=0] (0.015,0.02) circle (2.5cm) node[scale=1.54] (m) {\textCenter}; 
+\freedraw[color=stampink,opacity=.5,line width=3pt,rotate=30] (-0.025,-0.01) circle (2.5cm) node[scale=1.5] (m) {\textCenter}; 
+\freedraw[color=stampink,opacity=.7,very thick,rotate=20] (0,0) circle (2.5cm) node[scale=1.52] (m) {\textCenter}; 
+\draw[draw=none] 
+    [postaction={path fading=north,fill=white!99,opacity=0.6}]
+    (-5,-5) rectangle (5,5);%
+
+\end{tikzpicture}}}
+
+
+\begin{document}
+
+% stamp under text
+\vspace{5.5cm}\hspace{8cm}\rotatebox[origin=c]{-30}{\Stamper}\vspace{-5.5cm}
+
+\lipsum[2] 
+% stamp over text
+\vspace{-2cm}\Stamper
+
+\end{document}
