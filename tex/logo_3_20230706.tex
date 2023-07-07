@@ -1,0 +1,51 @@
+\documentclass[tikz]{standalone}
+\usetikzlibrary{fadings,patterns,fit}
+
+% use stamp.png to make a fading (a mask)
+\begin{tikzfadingfrompicture}[name=stamp]
+  \node [fill=transparent!0,inner sep=0]
+  {\includegraphics[width=50pt,height=50pt]{trans_899316.png}};
+  \begin{scope}[yshift=-90pt,transform canvas={scale=.2}]
+    \node[color=gray!50!black,font=\ttfamily] {\today};
+  \end{scope}
+\end{tikzfadingfrompicture}
+
+\colorlet{mycolor}{blue}
+\pgfdeclarefunctionalshading{stampfunctional}
+{\pgfpointorigin}{\pgfpoint{4cm}{4cm}}{\pgfshadecolortorgb{mycolor}{\myrgb}}{
+  20 mul
+  sin 1 add 0.5 mul
+  exch
+  20 mul
+  cos 1 add 0.5 mul
+  add 0.5 mul
+  %1 exch sub
+  dup \myrgbred
+  1 exch sub mul 1 exch sub exch
+  dup \myrgbgreen
+  1 exch sub mul 1 exch sub exch
+  \myrgbblue
+  1 exch sub mul 1 exch sub
+}
+
+\begin{document}
+\begin{tikzpicture}[inner sep=0]
+  \colorlet{mycolor}{blue!70!black}
+  % fill a region stampshading
+  \node[
+  shading=stampfunctional,
+  shading angle=-45,
+  minimum width=4cm,minimum height=4cm]{};
+  % fade the same region using stamp fading as mask
+  \node[fill=white,minimum width=4cm,minimum height=4cm,path fading=stamp]{};
+
+  \colorlet{mycolor}{lime!70!black}
+  % fill a region stampshading
+  \node[
+  shading=stampfunctional,
+  shading angle=-45,
+  minimum width=4cm,minimum height=4cm] at (0,4){};
+  % fade the same region using stamp fading as mask
+  \node[fill=white,minimum width=4cm,minimum height=4cm,path fading=stamp] at (0,4){};
+\end{tikzpicture}
+\end{document}
