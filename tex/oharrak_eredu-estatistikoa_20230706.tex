@@ -157,7 +157,7 @@ ________________________________________________________________________
 
 https://www.vectorstock.com/royalty-free-vector/one-continuous-line-drawing-sexy-beauty-woman-vector-33359651
 https://rpubs.com/laurie/904044
-
+https://pdf2png.com/es/
 
 #
 ##
@@ -172,7 +172,20 @@ https://rpubs.com/laurie/904044
 If you run into an issue, please submit a ticket, [here](https://github.com/alexanderkell/elecsim/issues)
 
 
-https://pdf2png.com/es/
+How to Untrack a File That Has Been Committed
+
+It is IMPORTANT to note that you MUST COMMIT ALL PREVIOUS CHANGES BEFORE CONTINUING
+
+    Remove everything from Local Repo git rm -r --cached . or if you are untracking a specific file(s) git rm -r --cached name_of_file
+    Add back all untracked files git add .
+    Commit Changes git commit -m "untrack name_of_file fix"
+    Push changes to remote repo git push
+
+
+
+
+
+
 
 
 
