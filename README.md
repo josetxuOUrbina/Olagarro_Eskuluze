@@ -11,12 +11,13 @@
 * ...
 
 
-![imagen](logo_3_20230706_1.png)
+![imagen](logo_3_20230706-1.png)
 
 
 ```
 Bada modu sinple bat gaixoari jakinarazteko.
-``
+```
+
 
 Ausazko iragarpen bat aurkeztu, arriskuko iragarpenaren ordez. 1.4.4 analisiaren zifrak Cochrane meta-analisian erabiliz, 2013tik aurreneurrizko estatu proben arabera, litekeena da kalkulatzea hurrengo 3-4 urteetan bihotzekoa ez izateko aukera % 97 ingurukoa dela.
 
